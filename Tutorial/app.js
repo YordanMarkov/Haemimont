@@ -1,7 +1,7 @@
 //console.log('Hello, Vue');
 
 const app = Vue.createApp({
-    //template: '<h1>You are an idiot</h1>'
+    //template: '<h1>fsdfdsfdssfdt</h1>'
     data() {
         return {
             title: 'Cursed',
