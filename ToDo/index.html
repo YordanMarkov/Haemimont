@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>ToDo: Task Manager</h1>
+    <b>Use the remove button to mark as done.</b>
+    <div id="app">
+        <ul id="list">
+            <li v-for="t in list">
+                Title: {{ t.title }} <br></br> 
+                Due date: {{t.dueDate}} <br></br> 
+                Description: {{t.description}} <br></br>
+                <button v-on:click="remove(t)">Remove</button>
+            </li>
+        </ul>
+
+        <p>Insert task:</p>
+        <input v-model="task.title" placeholder="Title: e.g. 'Task 1'"/>
+        <input v-model="task.dueDate" placeholder="Date: e.g. '2022-08-30'"/>
+        <input v-model="task.description" placeholder="Description: e.g. 'Code'"/>
+        <div v-if="task.title !== null && task.dueDate !== null && task.description !== null">
+            <button v-on:click="insert()">Push</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
