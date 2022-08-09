@@ -17,9 +17,15 @@ const app = Vue.createApp({
                 dueDate: this.task.dueDate,
                 description: this.task.description
             });
+            this.cleart();
         },
         remove(t) {
             this.list.splice(t, 1);
+        },
+        cleart() {
+            this.task.title = null;
+            this.task.dueDate = null;
+            this.task.description = null;
         }
     }
 })
