@@ -10,6 +10,13 @@
     <h1>ToDo: Task Manager</h1>
     <b>Use the remove button to mark as done.</b>
     <div id="app">
+        <p>Insert task:</p>
+        <input v-model="task.title" placeholder="Title: e.g. 'Task 1'"/>
+        <input v-model="task.dueDate" placeholder="Date: e.g. '2022-08-30'"/>
+        <input v-model="task.description" placeholder="Description: e.g. 'Code'"/>
+        <div v-if="task.title !== null && task.dueDate !== null && task.description !== null">
+            <button v-on:click="insert()">Push</button>
+        </div>
         <ul id="list">
             <li v-for="t in list">
                 Title: {{ t.title }} <br></br> 
@@ -18,14 +25,6 @@
                 <button v-on:click="remove(t)">Remove</button>
             </li>
         </ul>
-
-        <p>Insert task:</p>
-        <input v-model="task.title" placeholder="Title: e.g. 'Task 1'"/>
-        <input v-model="task.dueDate" placeholder="Date: e.g. '2022-08-30'"/>
-        <input v-model="task.description" placeholder="Description: e.g. 'Code'"/>
-        <div v-if="task.title !== null && task.dueDate !== null && task.description !== null">
-            <button v-on:click="insert()">Push</button>
-        </div>
     </div>
     <script src="app.js"></script>
 </body>
