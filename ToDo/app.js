@@ -7,6 +7,11 @@ const app = Vue.createApp({
                 dueDate: null,
                 description: null,
                 done: 0
+            },
+            info: {
+                user: null,
+                password: null,
+                id: 0
             }
         }
     },
@@ -17,15 +22,18 @@ const app = Vue.createApp({
                 dueDate: this.task.dueDate,
                 description: this.task.description
             });
-            this.cleart();
+            this.clearTask();
         },
         remove(t) {
             this.list.splice(t, 1);
         },
-        cleart() {
-            this.task.title = null;
-            this.task.dueDate = null;
-            this.task.description = null;
+        clearTask() {
+            this.task = {
+                title: null,
+                dueDate: null,
+                description: null,
+                done: 0
+            }
         }
     }
 })
