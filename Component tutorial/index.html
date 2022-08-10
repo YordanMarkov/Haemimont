@@ -1,0 +1,48 @@
+<!--
+Here we show the simplest possible component which accepts a prop and renders it.
+Learn more about components in the guide!
+-->
+
+<script type="module">
+    import { createApp, ref } from 'https://unpkg.com/vue@3.2.37/dist/vue.esm-browser.js'
+    import TodoItem from './TodoItem.js'
+    
+    createApp({
+      components: {
+        TodoItem
+      },
+      setup() {
+        const groceryList = ref([
+          { id: 0, text: 'Vegetables' },
+          { id: 1, text: 'Cheese' },
+          { id: 2, text: 'Whatever else humans are supposed to eat' }
+        ])
+    
+        return {
+          groceryList
+        }
+      },
+      methods: {
+        console() {
+            console.log('1');
+        }
+      }
+    }).mount('#app')
+    </script>
+    
+    <div id="app">
+      <ol>
+        <!--
+          We are providing each todo-item with the todo object
+          it's representing, so that its content can be dynamic.
+          We also need to provide each component with a "key",
+          which is explained in the guide section on v-for.
+        -->
+        <todo-item
+          v-for="item in groceryList"
+          :todo="item"
+          :key="item.id"
+        ></todo-item>
+        <button v-on:click="console()"> pomosht pls </button>
+      </ol>
+    </div>
