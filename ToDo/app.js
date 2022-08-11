@@ -1,3 +1,4 @@
+
 const app = Vue.createApp({
     data() {
         return {
@@ -35,11 +36,13 @@ app.component('login', {
     template: `
       <div>
             <h1>ToDo: Task Manager</h1>
+
             <b>Log in in order to edit/view your tasks.</b>
             
             <input v-model="info.user" placeholder="Username: e.g. 'ToDo'"/>
             
             <input v-model="info.password" placeholder="Password: e.g. 'T0d0P@ssw0rD'"/>
+            
             <div v-if="info.user !== null && info.password !== null">
                 <button @click="$emit('login')">Log in</button>
             </div>        
@@ -51,7 +54,9 @@ app.component('task', {
     data() {
         return {
             list: [],
+            id_c: -1,
             task: {
+                id: null,
                 title: null,
                 dueDate: null,
                 description: null,
@@ -61,7 +66,9 @@ app.component('task', {
     },
     methods: {
         insert() {
+            this.id_c++;
             this.list.push({
+                id: this.id_c,
                 title: this.task.title,
                 dueDate: this.task.dueDate,
                 description: this.task.description
@@ -69,7 +76,9 @@ app.component('task', {
             this.clearTask();
         },
         remove(t) {
-            this.list.splice(t, 1);
+            console.log(t.id)
+            this.list = this.list.filter((e)=>e.id !== t.id)
+
         },
         clearTask() {
             this.task = {
