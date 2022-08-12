@@ -1,4 +1,3 @@
-
 const app = Vue.createApp({
     data() {
         return {
@@ -36,7 +35,6 @@ app.component('login', {
     template: `
       <div>
             <h1>ToDo: Task Manager</h1>
-
             <b>Log in in order to edit/view your tasks.</b>
             
             <input v-model="info.user" placeholder="Username: e.g. 'ToDo'"/>
@@ -92,7 +90,6 @@ app.component('task', {
     template: `
             <h1>ToDo: Task Manager</h1>
             <b>Use the remove button to mark as done.</b>
-
             <p>Insert task:</p>
             <input v-model="task.title" placeholder="Title: e.g. 'Task 1'"/>
             <input v-model="task.dueDate" placeholder="Date: e.g. '2022-08-30'"/>

@@ -1,0 +1,35 @@
+<!-- <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>ToDo</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="app.js"></script>
+</body>
+</html> -->
+
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3.2.37"></script> 
+    <script type="module">
+        import input from './app.js'  
+        import login from './login.js'
+        import task from './task.js'
+        const app = window.Vue.createApp(input);
+        app.component('login', login);
+        app.component('task', task);
+        app.mount('#app');
+    </script>
+    <title>ToDo</title>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+</html>
