@@ -2,7 +2,9 @@ export default {
     data() {
         return {
             list: [],
+            get: [],
             id_c: -1,
+            unique: null,
             task: {
                 id: null,
                 title: null,
@@ -35,11 +37,17 @@ export default {
                 description: null,
                 done: 0
             }
+        },
+        user(user, password) {
+            this.unique = user + password;
+            console.log(unique);
         }
     },
     template: `
+            <app  @user="user" />
             <h1>ToDo: Task Manager</h1>
             <b>Use the remove button to mark as done.</b>
+            <button @click="$emit('login', 0, null, null);">Go back</button>
             <p>Insert task:</p>
             <input v-model="task.title" placeholder="Title: e.g. 'Task 1'"/>
             <input v-model="task.dueDate" placeholder="Date: e.g. '2022-08-30'"/>

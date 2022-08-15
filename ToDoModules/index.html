@@ -22,9 +22,11 @@
         import input from './app.js'  
         import login from './login.js'
         import task from './task.js'
+        import create from './create.js'
         const app = window.Vue.createApp(input);
         app.component('login', login);
         app.component('task', task);
+        app.component('create', create);
         app.mount('#app');
     </script>
     <title>ToDo</title>
