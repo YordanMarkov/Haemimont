@@ -10,8 +10,13 @@ export default {
     },
     methods: {
         returnKey(key) {
-            console.log(localStorage.getItem(key));
+            //console.log(localStorage.getItem(key));
             return localStorage.getItem(key);
+        },
+        setLog() {
+            if(!localStorage.getItem('isLogged')) {
+                localStorage.setItem('isLogged', 1);
+            }
         }
     },
     template: `
@@ -23,8 +28,8 @@ export default {
             
             <input v-model="info.password" placeholder="Password: e.g. 'T0d0P@ssw0rD'"/>
             
-            <div v-if="info.user !== null && info.password === returnKey(info.user)">
-                <button @click="$emit('login', 1, null, null), $emit('user', this.user, this.password)">Log in</button>
+            <div v-if="info.user !== null && returnKey(info.user)">
+                <button @click="$emit('login', 1, null, null), $emit('user', this.user, this.password), setLog()">Log in</button>
             </div>   
             <div>
                 <button @click="$emit('login', -1, null, null);">Create account</button>

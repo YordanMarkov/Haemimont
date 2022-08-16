@@ -26,7 +26,7 @@ export default {
             this.clearTask();
         },
         remove(t) {
-            console.log(t.id)
+            //console.log(t.id)
             this.list = this.list.filter((e)=>e.id !== t.id)
 
         },
@@ -40,7 +40,7 @@ export default {
         },
         user(user, password) {
             this.unique = user + password;
-            console.log(unique);
+            //console.log(unique);
         }
     },
     template: `
