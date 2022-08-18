@@ -1,10 +1,22 @@
 export default {
+    props: ['user'],
+    created() {
+        if(!localStorage.getItem(this.user)) {
+            localStorage.setItem(this.user, '[]');
+        } else {
+            this.list = JSON.parse(localStorage.getItem(this.user));
+        }
+        if(!localStorage.getItem(this.id_iden)) {
+            localStorage.setItem(this.id_iden, -1);
+        } else {
+            this.id_c = localStorage.getItem(this.id_iden);
+        }
+    },
     data() {
         return {
             list: [],
-            get: [],
             id_c: -1,
-            unique: null,
+            id_iden: 'ID' + this.user,
             task: {
                 id: null,
                 title: null,
@@ -23,11 +35,14 @@ export default {
                 dueDate: this.task.dueDate,
                 description: this.task.description
             });
+            localStorage.setItem(this.user, JSON.stringify(this.list));
+            localStorage.setItem(this.id_iden, this.id_c);
             this.clearTask();
         },
         remove(t) {
             //console.log(t.id)
             this.list = this.list.filter((e)=>e.id !== t.id)
+            localStorage.setItem(this.user, JSON.stringify(this.list));
 
         },
         clearTask() {
@@ -37,14 +52,13 @@ export default {
                 description: null,
                 done: 0
             }
-        },
-        user(user, password) {
-            this.unique = user + password;
-            //console.log(unique);
         }
+        // ,userCheck() {
+        //     console.log(this.user);
+        // }
     },
     template: `
-            <app  @user="user" />
+            <!-- <button v-on:click="userCheck()">user</button> -->
             <h1>ToDo: Task Manager</h1>
             <b>Use the remove button to mark as done.</b>
             <button @click="$emit('login', 0, null, null);">Go back</button>

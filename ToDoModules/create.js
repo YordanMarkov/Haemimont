@@ -7,6 +7,24 @@ export default {
             }
         }
     },
+    methods: {
+        checkIfExists(key) {
+            let flag = 0;
+            if(!localStorage.getItem('users')) {
+                flag = 1;
+            }
+            let bool = true;
+            let a = JSON.parse(localStorage.getItem('users'));
+            if(flag !== 1) {
+                a.forEach(element => {
+                    if(element.username === key) {
+                        bool = false;
+                    }
+                });
+            }
+            return bool; 
+        }
+    },
     template: `
       <div>
             <h1>ToDo: Task Manager</h1>
@@ -18,9 +36,12 @@ export default {
             
             <button @click="$emit('login', 0, null, null);">Go back</button>
 
-            <div v-if="info.user !== null && info.password !== null">
+            <div v-if="checkIfExists(info.user) && info.password !== null">
                 <button @click="$emit('login', 0, info.user, info.password);">Create</button>
-            </div>        
+            </div>   
+            <div v-if="!checkIfExists(info.user)">
+                <b>This username is already taken!</b>
+            </div>     
       </div>
     `
 }

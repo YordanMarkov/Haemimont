@@ -13,18 +13,16 @@ export default {
                 localStorage.removeItem('isLogged');
             }
             if(user !== null && password !== null && this.id !== 1) {
-                //localStorage.setItem('users', '{\"username\" : \"' + user + '\", \"password\" : \"' + password +'\"}');
                 this.append(user, password);
                 this.user = user;
                 this.password = password;
-                //console.log(10);
             }
-            //console.log(localStorage.getItem(user));
         },
         isLogged() {
             if(!localStorage.getItem('isLogged')) {
                 return 0;
             }
+            this.user = localStorage.getItem('isLogged');
             this.id = 1;
             return 1;
         },
@@ -32,14 +30,9 @@ export default {
             localStorage.clear();
         },
         append(u, p) {
-            //debugger;
             if(!!localStorage.getItem('users')) {
-                //debugger;
-                //debugger; 
                 let a = JSON.parse(localStorage.getItem('users'));
-                //debugger;
                 a.push({"username": u, "password": p});
-                //debugger;
                 localStorage.setItem('users', JSON.stringify(a)); 
             } else {
                 localStorage.setItem('users', JSON.stringify([{username: u, password: p}]));
@@ -53,7 +46,7 @@ export default {
             <login  @login="listen" />
         </div>
         <div v-if="id === 1 && isLogged() === 1">
-            <task  @login="listen" />
+            <task :user="this.user" @login="listen" />
         </div>
         <div v-if="id === -1">
             <create  @login="listen" />
