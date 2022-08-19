@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- /<script type="module" src="/src/main.js"></script> -->
+    <script type="module">
+      import input from './app.js'  
+      import login from './login.js'
+      import task from './task.js'
+      import create from './create.js'
+      const app = window.Vue.createApp(input);
+      app.component('login', login);
+      app.component('task', task);
+      app.component('create', create);
+      app.mount('#app');
+  </script>
+  </body>
+</html>
