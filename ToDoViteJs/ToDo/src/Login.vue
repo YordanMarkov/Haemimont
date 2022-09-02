@@ -29,14 +29,15 @@
 
 <template>
     <div>
-        <h1>ToDo: Task Manager</h1>
+        <h1 class="text-3x1 font-bold">ToDo: Task Manager</h1>
+        <!-- <h1>ToDo: Task Manager</h1> -->
         <b>Log in in order to edit/view your tasks.</b>
         <br>
         
-        <input v-model="user" placeholder="Username: e.g. 'ToDo'"/>
+        <input v-model="user" placeholder="Username" class="text-3x1 font-bold"/>
         <br>
         
-        <input v-model="password" placeholder="Password: e.g. 'T0d0P@ssw0rD'"/>
+        <input v-model="password" placeholder="Password" class="text-3x1 font-bold"/>
         <br>
 
         <div v-if="userExists">

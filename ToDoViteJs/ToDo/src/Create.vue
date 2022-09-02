@@ -35,12 +35,14 @@
 
 <template>
     <div>
-            <h1>ToDo: Task Manager</h1>
+            <h1 class="text-3x1 font-bold">ToDo: Task Manager</h1>
             <b>Create profile</b><br>
             
-            <input v-model="user" placeholder="Username: e.g. 'ToDo'"/><br>
+            <input v-model="user" placeholder="Username" class="text-3x1 font-bold"/>
+            <br>
             
-            <input v-model="password" placeholder="Password: e.g. 'T0d0P@ssw0rD'"/><br>
+            <input v-model="password" placeholder="Password" class="text-3x1 font-bold"/>
+            <br>
             
             <button @click="$emit('return');">Go back</button><br>
 
@@ -49,7 +51,7 @@
             </div>  
 
             <div v-if="userExists">
-                <b>This username is already taken!</b>
+                <b class = "text-3x1 font-bold text-red-900" >This username is already taken!</b>
             </div>      
       </div>
 </template>

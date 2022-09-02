@@ -49,24 +49,24 @@
 </script>
 
 <template>
-    <h1>ToDo: Task Manager</h1>
+    <h1 class="text-3x1 font-bold">ToDo: Task Manager</h1>
     <b>Use the remove button to mark as done.</b>
     <br>
     <button @click="$emit('logout');">Go back</button>
     <p>Insert task</p>
-    <input v-model="task.title" placeholder="Title: e.g. 'Task 1'"/><br>
-    <input v-model="task.dueDate" placeholder="Date: e.g. '2022-08-30'"/><br>
-    <input v-model="task.description" placeholder="Description: e.g. 'Code'"/><br>
+    <input v-model="task.title" placeholder="Title" class="text-3x1 font-bold"/><br>
+    <input v-model="task.dueDate" placeholder="Date" class="text-3x1 font-bold"/><br>
+    <input v-model="task.description" placeholder="Description" class="text-3x1 font-bold"/><br>
     <div v-if="task.title !== null && task.dueDate !== null && task.description !== null">
         <button v-on:click="insert()">Push</button>
         <br>
     </div>
     <ul id="list">
-        <li v-for="t in list">
-            Title <br> {{ t.title }} <br>
-            Due date <br> {{t.dueDate}}  <br>
-            Description <br> {{t.description}} <br> 
-            <button v-on:click="remove(t)">Remove</button>
+        <li v-for="t in list" class="text-3x1 font-bold text-cyan-700">
+            {{ t.title }} <br>
+            Due: {{t.dueDate}}  <br>
+            Description: {{t.description}} <br> 
+            <button v-on:click="remove(t)" class="text-3x1 font-bold text-red-900" >Remove</button> <br>
         </li>
     </ul>
 </template>
