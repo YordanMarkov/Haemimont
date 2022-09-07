@@ -34,24 +34,25 @@
 </script>
 
 <template>
-    <div>
-            <h1 class="text-3x1 font-bold">ToDo: Task Manager</h1>
-            <b>Create profile</b><br>
+    <div>   
+            <div class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+            <button @click="$emit('return');" class="font-bold text-4xl text-slate-600">&#8592</button><br>
+            <h1 class="font-bold text-7xl">ToDo: Task Manager</h1>
+            <b class="font-bold text-4xl">Create profile</b><br>
             
-            <input v-model="user" placeholder="Username" class="text-3x1 font-bold"/>
+            <input v-model="user" placeholder="Username" class="font-bold text-4xl text-center text-slate-400"/>
             <br>
             
-            <input v-model="password" placeholder="Password" class="text-3x1 font-bold"/>
+            <input v-model="password" placeholder="Password" class="font-bold text-4xl text-center text-slate-400"/>
             <br>
-            
-            <button @click="$emit('return');">Go back</button><br>
 
             <div v-if="!userExists && password !== null">
-                <button @click="onCreate">Create</button>
-            </div>  
-
+                <button @click="onCreate" class="font-bold text-4xl text-lime-300">Create</button>
+            </div> 
+            
             <div v-if="userExists">
-                <b class = "text-3x1 font-bold text-red-900" >This username is already taken!</b>
-            </div>      
+                <b class = "font-bold text-red-900 text-4xl text-red-500">This username is already taken!</b>
+            </div>   
+            <div class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500"></div>   
       </div>
 </template>

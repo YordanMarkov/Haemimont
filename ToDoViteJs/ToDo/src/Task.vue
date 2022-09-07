@@ -5,6 +5,7 @@
             this.list = JSON.parse(localStorage.getItem(this.user)) ?? []
             if(this.list.length > 0)
                 this.id_c = this.list.map(({id}) => id).sort().reverse()[0] + 1
+            this.$store.commit('ToDoListUpdate');
         },
         watch: {
             list(newValue) {
@@ -49,24 +50,24 @@
 </script>
 
 <template>
-    <h1 class="text-3x1 font-bold">ToDo: Task Manager</h1>
-    <b>Use the remove button to mark as done.</b>
+    <!-- <button @click="$store.commit('increment')">console</button> -->
+    <div class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+    <button @click="$emit('logout');" class="font-bold text-4xl text-slate-600">&#8592</button><br>
+    <h1 class="font-bold text-7xl">ToDo: Task Manager</h1>
+    <b class="font-bold text-4xl">Use the remove button to mark as done.</b>
     <br>
-    <button @click="$emit('logout');">Go back</button>
-    <p>Insert task</p>
-    <input v-model="task.title" placeholder="Title" class="text-3x1 font-bold"/><br>
-    <input v-model="task.dueDate" placeholder="Date" class="text-3x1 font-bold"/><br>
-    <input v-model="task.description" placeholder="Description" class="text-3x1 font-bold"/><br>
+    <input v-model="task.title" placeholder="Title" class="text-3xl font-bold text-center text-slate-400"/><br>
+    <input v-model="task.dueDate" placeholder="Date" class="text-3xl font-bold text-center text-slate-400"/><br>
+    <input v-model="task.description" placeholder="Description" class="text-3xl font-bold text-center text-slate-400"/><br>
     <div v-if="task.title !== null && task.dueDate !== null && task.description !== null">
-        <button v-on:click="insert()">Push</button>
+        <button v-on:click="insert()" class="font-bold text-4xl text-lime-300">Push</button>
         <br>
     </div>
     <ul id="list">
-        <li v-for="t in list" class="text-3x1 font-bold text-cyan-700">
-            {{ t.title }} <br>
-            Due: {{t.dueDate}}  <br>
-            Description: {{t.description}} <br> 
-            <button v-on:click="remove(t)" class="text-3x1 font-bold text-red-900" >Remove</button> <br>
+        <li v-for="t in list" class="text-3xl font-bold">
+            Task '{{ t.title }}' has to be done before {{t.dueDate}}. Description - '{{t.description}}' 
+            <button v-on:click="remove(t)" class="text-3xl font-bold text-red-900">&#10060</button> <br>
         </li>
     </ul>
+    <div class="h-14 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
 </template>
