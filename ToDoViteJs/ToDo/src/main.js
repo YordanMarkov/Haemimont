@@ -7,39 +7,61 @@ import Login from './Login.vue'
 import Create from './Create.vue'
 import Task from './Task.vue'
 
-const login = { template:  Login}
-const create = { template:  Create}
-const task = { template:  Task}
 
 const routes = [
-    { path: '/', component: login },
-    { path: '/create', component: create },
-    { path: '/task', component: task}
+    { path: '/', component: Login },
+    { path: '/create', component: Create },
+    { path: '/task', component: Task}
 ]
-export default {
-    
-}
+debugger
+const router = VueRouter.createRouter({
+  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+  history: VueRouter.createWebHashHistory(),
+  routes, // short for `routes: routes`
+})
+
 const store = createStore({
     state () {
       return {
-        isLogged: localStorage.getItem('isLogged'),
+        currentUserName: localStorage.getItem('isLogged'),
         ToDoList: [],
         users: JSON.parse(localStorage.getItem('users')) ?? []
       }
     },
     mutations: {
-      increment () {
-        // state.todoes+=
-        //console.log(this.users);
-        console.log(1);
+      // increment (state) {
+      //   // state.todoes+=
+      //   //console.log(this.users);
+      //   console.log(1);
+      // },
+      setToDos(state, result) {
+        // state.users.forEach(element => {
+        //   state.ToDoList.push(JSON.parse(localStorage.getItem(element.username)) ?? [])
+        // });
+        // console.log(state.ToDoList);
+        //   //state.ToDoList = JSON.parse(localStorage.getItem(this.user)) ?? []
+        state.ToDoList = result;
       },
-      ToDoListUpdate() {
-        state.users.forEach(user => {
-          state.ToDoList.push(JSON.parse(localStorage.getItem(user.username)) ?? [])
-        });
-        console.log(state.ToDoList);
-          //state.ToDoList = JSON.parse(localStorage.getItem(this.user)) ?? []
+      addToDo(state, result) {
+        state.ToDoList.push(result);
       }
+    },
+    actions: {
+      setDoList({commit, state}) {
+          commit('setToDos', JSON.parse(localStorage.getItem(state.currentUserName)) ?? [])
+      },
+      ToDoPush({commit, state}, newValue) {
+        if(!!newValue) {
+          commit('addToDo', newValue);
+          localStorage.setItem(state.currentUserName, JSON.stringify(state.ToDoList));
+        }
+      },
+      ToDoDel({commit, state}, t) {
+        //result = this.ToDoList.filter((e)=>e.id !== t.id);
+        commit('setToDos', state.ToDoList.filter((e)=>e.id !== t.id));
+        localStorage.setItem(state.currentUserName, JSON.stringify(state.ToDoList));
+      }
+
     }
   })
  /*
@@ -52,4 +74,5 @@ const store = createStore({
 
 const app = createApp(App)
 app.use(store)
+app.use(router)
 app.mount('#app')

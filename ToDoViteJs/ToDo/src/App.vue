@@ -48,5 +48,6 @@
       <div v-else-if="currPage === 'create'">
           <create @return="currPage = 'login'" />
       </div>
+      <!-- <router-view></router-view> -->
   </div>
 </template>

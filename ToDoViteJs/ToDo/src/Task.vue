@@ -1,20 +1,24 @@
 <script>
+    import {mapState} from 'vuex'
+
     export default {
         props: ['user'],
         created() {
-            this.list = JSON.parse(localStorage.getItem(this.user)) ?? []
+            // this.list = JSON.parse(localStorage.getItem(this.user)) ?? []
+            // if(this.list.length > 0)
+            //     this.id_c = this.list.map(({id}) => id).sort().reverse()[0] + 1
+            this.$store.dispatch('setDoList');
+    
             if(this.list.length > 0)
                 this.id_c = this.list.map(({id}) => id).sort().reverse()[0] + 1
-            this.$store.commit('ToDoListUpdate');
         },
-        watch: {
-            list(newValue) {
-                localStorage.setItem(this.user, JSON.stringify(newValue));
-            }
+        computed: {
+            ...mapState({
+                list: 'ToDoList'
+            })
         },
         data() {
             return {
-                list: [],
                 id_c: 0,
                 task: {
                     id: null,
@@ -25,17 +29,28 @@
             }
         },
         methods: {
+            returnList() {
+                return this.$store.state.ToDoList;
+            },
             insert() {
-                this.list = this.list.concat({
+                // this.list = this.list.concat({
+                //     id: this.id_c++,
+                //     title: this.task.title,
+                //     dueDate: this.task.dueDate,
+                //     description: this.task.description
+                // });
+                // this.clearTask();
+                this.$store.dispatch('ToDoPush', {
                     id: this.id_c++,
                     title: this.task.title,
                     dueDate: this.task.dueDate,
                     description: this.task.description
-                });
+                })
                 this.clearTask();
             },
             remove(t) {
-                this.list = this.list.filter((e)=>e.id !== t.id)
+                //this.list = this.list.filter((e)=>e.id !== t.id)
+                this.$store.dispatch('ToDoDel', t);
             },
             clearTask() {
                 this.task = {
@@ -55,6 +70,8 @@
     <button @click="$emit('logout');" class="font-bold text-4xl text-slate-600">&#8592</button><br>
     <h1 class="font-bold text-7xl">ToDo: Task Manager</h1>
     <b class="font-bold text-4xl">Use the remove button to mark as done.</b>
+    <br>
+    <b class="font-bold text-4xl">Current user: {{ user }}</b>
     <br>
     <input v-model="task.title" placeholder="Title" class="text-3xl font-bold text-center text-slate-400"/><br>
     <input v-model="task.dueDate" placeholder="Date" class="text-3xl font-bold text-center text-slate-400"/><br>
